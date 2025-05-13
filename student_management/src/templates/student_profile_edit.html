@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student Profile</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --light: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: linear-gradient(rgba(44, 62, 80, 0.6), rgba(44, 62, 80, 0.6)),
+                              url('https://plus.unsplash.com/premium_photo-1738416571378-46793a101767?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            filter: blur(2px);
+            z-index: -1;
+        }
+
+        .container {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+            width: 100%;
+            max-width: 600px;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group select,
+        .form-group input[type="date"],
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #f8f8f8;
+            font-size: 15px;
+            color: #333;
+            transition: 0.3s;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary);
+            border: none;
+            color: white;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Edit Student Profile</h1>
+        </div>
+        <form method="POST">
+            <div class="form-group">
+                <label for="admission_no">Admission No</label>
+                <input type="text" id="admission_no" name="admission_no" value="{{ student.admission_no }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" value="{{ student.name }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" value="{{ student.dob }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <input type="text" id="gender" name="gender" value="{{ student.gender }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="{{ student.email }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Mobile</label>
+                <input type="text" id="phone" name="phone" value="{{ student.phone }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea id="address" name="address" required>{{ student.address }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="blood_group">Blood Group</label>
+                <input type="text" id="blood_group" name="blood_group" value="{{ student.blood_group }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="father_name">Father's Name</label>
+                <input type="text" id="father_name" name="father_name" value="{{ student.father_name }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mother_name">Mother's Name</label>
+                <input type="text" id="mother_name" name="mother_name" value="{{ student.mother_name }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="parent_phone">Parent Phone</label>
+                <input type="text" id="parent_phone" name="parent_phone" value="{{ student.parent_phone }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="aadhaar">Aadhaar</label>
+                <input type="text" id="aadhaar" name="aadhaar" value="{{ student.aadhaar }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="plus_two_percentage">12th Percentage</label>
+                <input type="number" id="plus_two_percentage" name="plus_two_percentage" value="{{ student.plus_two_percentage }}" step="0.01" required>
+            </div>
+
+            <button type="submit">Save Changes</button>
+        </form>
+        <a href="{{ url_for('student_dashboard') }}" class="back-link">← Back to Home</a>
+    </div>
+</body>
+</html>

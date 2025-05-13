@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <p>Please select your login type:</p>
+        
+        <div class="login-options">
+            <a href="{{ url_for('student_login') }}" class="login-btn">Student Login</a>
+            <a href="{{ url_for('staff_login') }}" class="login-btn">Staff Login</a>
+        </div>
+    </div>
+</body>
+</html>

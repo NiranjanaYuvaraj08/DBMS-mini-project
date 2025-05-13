@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Attendance</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --light: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background-image: linear-gradient(rgba(44, 62, 80, 0.6), rgba(44, 62, 80, 0.6)),
+                              url('https://attendanceradar.com/wp-content/uploads/2023/10/students.webp');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow);
+            width: 100%;
+            max-width: 500px;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group select,
+        .form-group input[type="date"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #f8f8f8;
+            font-size: 15px;
+            color: #333;
+            transition: 0.3s;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary);
+            border: none;
+            color: white;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .link-text {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .link-text:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Mark Attendance</h1>
+        </div>
+        <form method="POST">
+            <div class="form-group">
+                <label for="student_id">Student ID:</label>
+                <select id="student_id" name="student_id" required>
+                    <option value="">Select Student</option>
+                    {% for student in students %}
+                        <option value="{{ student[0] }}">{{ student[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="course_id">Course ID:</label>
+                <select id="course_id" name="course_id" required>
+                    <option value="">Select Course</option>
+                    {% for course in courses %}
+                        <option value="{{ course[0] }}">{{ course[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <select id="status" name="status" required>
+                    <option value="Present">Present</option>
+                    <option value="Absent">Absent</option>
+                </select>
+            </div>
+
+            <button type="submit">Mark Attendance</button>
+        </form>
+        <a href="{{ url_for('staff_dashboard') }}" class="link-text">Back to Home</a>
+    </div>
+</body>
+</html>

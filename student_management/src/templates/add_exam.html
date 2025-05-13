@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Exam</title>
+  <style>
+    :root {
+      --primary: #3498db;
+      --primary-dark: #2c80b4;
+      --light: #ffffff;
+      --shadow: rgba(0, 0, 0, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--light);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: linear-gradient(rgba(44, 62, 80, 0.6), rgba(44, 62, 80, 0.6)), url('https://jdadvising.com/wp-content/uploads/2019/09/bar_exam.png');
+      background-size: cover;
+      background-position: center;
+      filter: blur(2px);
+      z-index: -1;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px var(--shadow);
+      padding: 30px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 6px;
+    }
+
+    .form-group select,
+    .form-group input[type="date"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      background-color: #f8f8f8;
+      color: #333;
+      transition: 0.3s;
+    }
+
+    .form-group select:focus,
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background-color: var(--primary);
+      border: none;
+      color: white;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 18px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 576px) {
+      .container {
+        padding: 20px;
+      }
+
+      .header h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Add Exam</h1>
+    </div>
+    <form method="POST">
+      <div class="form-group">
+        <label for="course_id">Course:</label>
+        <select id="course_id" name="course_id" required>
+          <option value="">Select Course</option>
+          {% for course in courses %}
+            <option value="{{ course[0] }}">{{ course[1] }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="exam_date">Exam Date:</label>
+        <input type="date" id="exam_date" name="exam_date" required>
+      </div>
+
+      <button type="submit" class="btn">Add Exam</button>
+    </form>
+    <a href="{{ url_for('staff_dashboard') }}" class="back-link">← Back to Home</a>
+  </div>
+</body>
+</html>
